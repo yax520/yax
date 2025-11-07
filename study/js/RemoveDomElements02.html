@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>移除dom元素</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .common{
+            width: 160px;
+            height: 100px;
+            margin: 2px 0;
+            text-align: center;
+            line-height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <button id="add">添加</button>
+    <div id="dialog"></div>
+    <div class="dialog-modal"></div>
+    <div class="pop-box">
+        <div class="pop"></div>
+        <div class="mask"></div>
+        <div class="mask-modal"></div>
+    </div>
+    <div id="out-box">
+        <div class="ai-helper-box">
+            <div class="ai-helper"></div>
+        </div>
+    </div>
+</body>
+<script>
+    const colors=['lightblue','lightcoral','lightgrey','lightgreen','lightpink','lightsalmon']
+    const selectors=[
+        {
+            elem:'#dialog',
+            desc:'dialog'
+        },
+        {
+            elem:'body > div.dialog-modal',
+            desc:'dialog-modal'
+        },
+        {
+            elem:'body > div.pop-box > div.pop',
+            desc:'pop'
+        },
+        {
+            elem:'body > div.pop-box > div.mask',
+            desc:'mask'
+        },
+        {
+            elem:'body > div.pop-box > div.mask-modal',
+            desc:'mask-modal'
+        },
+        {
+            elem:'#out-box > div > div',
+            desc:'ai helper'
+        }
+    ]
+    selectors.forEach((e,i)=>{
+        const ele=document.querySelector(`${e.elem}`)
+        ele.style.backgroundColor=colors[i]
+        ele.textContent=e.desc
+        ele.classList.add('common')
+    })
+
+    window.onload = function () {
+         setTimeout(() => {
+            delElem()
+        }, 3000)
+    }
+    function delElem(){
+        setInterval(()=>{
+            selectors.forEach(e=>{
+                let ele=document.querySelector(`${e.elem}`)
+                let n=0
+                if(ele!=null){
+                    ele.remove()
+                    console.log('已删除')
+                }else{
+                    console.log('未找到')
+                }
+            })
+        },1000)
+    }
+
+    const add=document.querySelector('#add')
+    add.addEventListener('click',()=>{
+        console.log(document.querySelector('body'))
+        document.querySelector('body').innerHTML=`<button id="add">添加</button><div id="dialog"></div><div class="dialog-modal"></div><div class="pop-box"><div class="pop"></div><div class="mask"></div><div class="mask-modal"></div></div><div id="out-box"><div class="ai-helper-box"><div class="ai-helper"></div></div></div>`
+            
+    })
+</script>
+</html>

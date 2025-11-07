@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>移除dom元素</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .box{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .common{
+            width: 160px;
+            height: 100px;
+            margin: 0 6px;
+            text-align: center;
+            line-height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="dialog">dialog</div>
+        <div class="dialog-modal">dialog-modal</div>
+        <div class="pop">pop</div>
+        <div class="mask">mask</div>
+        <div class="mask-modal">ask-modal</div>
+        <div class="ai-helper">ai-helper</div>
+    </div>
+</body>
+<script>
+    const color_arr=['lightblue','lightcoral','lightgrey','lightgreen','lightpink','lightsalmon']
+    const elements=document.querySelectorAll('.box>div')
+    // console.log(elements)
+    elements.forEach((e,i)=>{
+        e.style.backgroundColor=color_arr[i]
+        e.classList.add('common')
+    })
+    setTimeout(()=>{
+        elements.forEach(e=>{
+            e.remove()
+        })
+    },5000)
+</script>
+</html>
